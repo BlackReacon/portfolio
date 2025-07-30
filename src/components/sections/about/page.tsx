@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function About() {
+export default function AboutPage() {
   return (
     <>
       <section id="about" className="py-24">

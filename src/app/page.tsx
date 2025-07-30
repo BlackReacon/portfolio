@@ -1,6 +1,6 @@
 import About from "@/components/sections/about/page";
 import Hero from "@/components/sections/hero/page";
-import Image from "next/image";
+import SkillsPage from "@/components/sections/skills/page";
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
       <main className="">
         <Hero />
         <About />
+        <SkillsPage />
       </main>
     </div>
   );
