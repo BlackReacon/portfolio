@@ -8,10 +8,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
       <main className="">
-        <Hero />
+{/*         <Hero />
         <About />
         <SkillsPage />
-        <ProjectsPage/>
+        <ProjectsPage/> */}
         <ContactPage />
       </main>
     </div>

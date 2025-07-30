@@ -21,6 +21,8 @@ export default function AboutPage() {
                         alt="Profil Bild von Daria"
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority
                       />
                     </div>
                   </div>
