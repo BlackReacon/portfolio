@@ -1,6 +1,7 @@
 import About from "@/components/sections/about/page";
 import Hero from "@/components/sections/hero/page";
 import SkillsPage from "@/components/sections/skills/page";
+import ProjectsPage from "@/components/sections/projects/page";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
         <Hero />
         <About />
         <SkillsPage />
+        <ProjectsPage/>
       </main>
     </div>
   );
