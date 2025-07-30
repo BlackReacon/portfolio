@@ -14,6 +14,7 @@ export default function SkillsPage() {
                     { icon: 'HTML', title: 'HTML5', description: 'Semantisches Markup und progressive Web-Standards' },
                     { icon: 'CSS', title: 'CSS3', description: 'Advanced Styling, Animations und responsive Design' },
                     { icon: 'JS', title: 'JavaScript', description: 'ES6+, Performance-Optimierung und moderne Patterns' },
+                    { icon: 'TypeScript', title: 'TypeScript', description: 'Type-Checking zur Kompilierungszeit für robustere Anwendungen' },
                     { icon: 'Next.js', title: 'Next.js', description: 'Server-Side Rendering, Static Site Generation und optimierte Performance für moderne Webanwendungen' },
                     { icon: 'Docker', title: 'Docker', description: 'Containerisierung' },
                     { icon: 'mariaDB', title: 'mariaDB', description: 'Open-Source relationale Datenbank mit hoher Kompatibilität zu MySQL' },
