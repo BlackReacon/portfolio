@@ -10,13 +10,13 @@ export default function HeroPage() {
         <p className="text-xl md:text-2xl text-gray-300 font-light tracking-wider">
           Hallo, ich bin
         </p>
-        <h1 className="text-6xl md:text-8xl font-black tracking-wider uppercase mb-4 bg-gradient-to-r from-gray-500 via-gray-400 to-gray-100 bg-clip-text text-transparent">
+        <h2 className="text-6xl md:text-8xl font-black tracking-wider uppercase mb-4 bg-gradient-to-r from-gray-500 via-gray-400 to-gray-100 bg-clip-text text-transparent">
           Daria Schmidt
-        </h1>
+        </h2>
         <p className="text-xl md:text-2xl text-gray-300 mb-12 font-light tracking-wider">
-          Staatlich gerpüfte Technikerin Mechatronik
+          Staatlich geprüfte Technikerin Mechatronik
           <br />&<br />
-          Fullstack-Webentwickler
+          Fullstack-Webentwicklerin
         </p>
         <Link
           href="/#contact"
