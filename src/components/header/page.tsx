@@ -6,7 +6,6 @@ export default function Header() {
       <div className="container mx-auto px-5">
         <nav className="flex justify-between items-center py-4">
 
-          <div className="flex items-center gap-4">
           <Link href="/" className="group relative inline-block">
             <h1 className="text-3xl font-extrabold uppercase tracking-tighter bg-gradient-to-r from-red-300 via-red-400 to-purple-600 bg-clip-text text-transparent transition-all duration-300 group-hover:brightness-110">
               Daria&apos;s Portfolio
@@ -17,7 +16,6 @@ export default function Header() {
             </div>
             <div className="absolute inset-x-0 bottom-0 h-1 bg-purple-600/10 blur-md opacity-0 group-hover:opacity-100 group-hover:scale-x-105 transition-all duration-700" />
           </Link>
-          </div>
 
           <div>
           <ul className="hidden lg:flex gap-12">
