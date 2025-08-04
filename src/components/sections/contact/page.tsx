@@ -55,9 +55,10 @@ export default function ContactPage() {
                 id="message"
                 name="message"
                 required
-                className="mt-1 block w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 transition duration-200 hover:border-gray-500"
+                className="resize-none mt-1 block w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 transition duration-200 hover:border-gray-500"
                 placeholder="Nachricht eingeben"
-              ></textarea>
+                rows={5}
+              />
             </div>
 
             <button
