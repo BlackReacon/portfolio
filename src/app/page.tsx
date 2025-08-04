@@ -9,8 +9,8 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white">
       <main>
          <Hero />
-    {/*    <About />
-        <SkillsPage />
+        <About />
+      {/*  <SkillsPage />
         <ProjectsPage/> */}
         <ContactPage />
       </main>
