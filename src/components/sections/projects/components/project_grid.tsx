@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { ProjectCard } from "@/components/sections/projects/components/project_card";
 import { useEffect, useRef, useState } from "react";
 
@@ -25,7 +25,7 @@ const PROJECTS = [
     description: "Konversations-KI mit Natural Language Processing.",
     tags: ["Python", "TensorFlow", "NLTK"],
   },
-    {
+  {
     title: "E-COMMERCE NEXUS",
     description:
       "Vollständige E-Commerce-Platform mit React, Node.js und MariaDB.",
@@ -58,7 +58,7 @@ const PROJECTS = [
 ];
 
 /* interval in ms */
-const SLIDE_INTERVAL = 4000; 
+const SLIDE_INTERVAL = 4000;
 /* number visbile projects */
 const VISIBLE_PROJECTS = 2;
 
@@ -67,25 +67,17 @@ export function ProjectsGrid() {
   const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Gruppiere die Projekte in Paaren
+  // groups of projects based on VISIBLE_PROJECTS
   const projectGroups = [];
   for (let i = 0; i < PROJECTS.length; i += VISIBLE_PROJECTS) {
     projectGroups.push(PROJECTS.slice(i, i + VISIBLE_PROJECTS));
   }
 
-  // Fülle die letzte Gruppe auf, falls nötig
-  if (PROJECTS.length % VISIBLE_PROJECTS !== 0) {
-    const lastGroup = projectGroups[projectGroups.length - 1];
-    while (lastGroup.length < VISIBLE_PROJECTS) {
-      lastGroup.push(PROJECTS[lastGroup.length]);
-    }
-  }
-
   useEffect(() => {
     const startSlideShow = () => {
       intervalRef.current = setInterval(() => {
-        setActiveGroupIndex(prevIndex => 
-          (prevIndex + 1) % projectGroups.length
+        setActiveGroupIndex(
+          (prevIndex) => (prevIndex + 1) % projectGroups.length
         );
       }, SLIDE_INTERVAL);
     };
@@ -103,37 +95,35 @@ export function ProjectsGrid() {
     };
   }, [isHovered, projectGroups.length]);
 
+  /* next project */
   const goToNext = () => {
-    setActiveGroupIndex(prevIndex => (prevIndex + 1) % projectGroups.length);
+    setActiveGroupIndex((prevIndex) => (prevIndex + 1) % projectGroups.length);
   };
-
+  /* previos project */
   const goToPrev = () => {
-    setActiveGroupIndex(prevIndex => 
+    setActiveGroupIndex((prevIndex) =>
       prevIndex === 0 ? projectGroups.length - 1 : prevIndex - 1
     );
   };
 
   return (
-    <div 
-      className="relative overflow-hidden"
+    <div
+      className="relative overflow-hidden py-4"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Slides Container */}
-      <div 
+      {/* slides container */}
+      <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${activeGroupIndex * 100}%)` }}
       >
         {projectGroups.map((group, groupIndex) => (
-          <div 
-            key={`group-${groupIndex}`} 
-            className="w-full flex-shrink-0"
-          >
+          <div key={`group-${groupIndex}`} className="w-full flex-shrink-0">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {group.map((project, projectIndex) => (
-                <ProjectCard 
-                  key={`${project.title}-${projectIndex}`} 
-                  project={project} 
+                <ProjectCard
+                  key={`${project.title}-${projectIndex}`}
+                  project={project}
                 />
               ))}
             </div>
@@ -141,17 +131,17 @@ export function ProjectsGrid() {
         ))}
       </div>
 
-      {/* Navigation Buttons */}
+      {/* navigation buttons */}
       {isHovered && projectGroups.length > 1 && (
         <>
-          <button 
+          <button
             onClick={goToPrev}
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/75 transition"
             aria-label="Previous projects"
           >
             &lt;
           </button>
-          <button 
+          <button
             onClick={goToNext}
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/75 transition"
             aria-label="Next projects"
@@ -161,7 +151,7 @@ export function ProjectsGrid() {
         </>
       )}
 
-      {/* Indicators */}
+      {/* indicators */}
       {projectGroups.length > 1 && (
         <div className="flex justify-center mt-4 space-x-2">
           {projectGroups.map((_, index) => (
@@ -169,7 +159,7 @@ export function ProjectsGrid() {
               key={index}
               onClick={() => setActiveGroupIndex(index)}
               className={`w-2 h-2 rounded-full ${
-                index === activeGroupIndex ? 'bg-primary' : 'bg-gray-300'
+                index === activeGroupIndex ? "bg-purple-500" : "bg-gray-300"
               }`}
               aria-label={`Go to group ${index + 1}`}
             />
