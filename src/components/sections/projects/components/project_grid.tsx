@@ -137,14 +137,14 @@ export function ProjectsGrid() {
           <button
             onClick={goToPrev}
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/75 transition"
-            aria-label="Previous projects"
+            aria-label="Zu den vorherigen Projekten zurückgehen"
           >
             &lt;
           </button>
           <button
             onClick={goToNext}
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/75 transition"
-            aria-label="Next projects"
+            aria-label="Zu den nächste Projekten gehen"
           >
             &gt;
           </button>
@@ -161,7 +161,7 @@ export function ProjectsGrid() {
               className={`w-2 h-2 rounded-full ${
                 index === activeGroupIndex ? "bg-purple-500" : "bg-gray-300"
               }`}
-              aria-label={`Go to group ${index + 1}`}
+              aria-label={`Gehe zu den nächsten Projekten ${index + 1}`}
             />
           ))}
         </div>
