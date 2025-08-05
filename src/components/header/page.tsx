@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="fixed w-full top-0 bg-gradient-to-l from-red-700/20 via-gray-900 to-gray-900 border-b border-b-purple-400/30">
+    <header className="fixed w-full top-0 bg-gradient-to-l from-red-700/20 via-gray-900 to-gray-900 bg-gray-900 border-b border-b-purple-400/30 z-50">
       <div className="container mx-auto px-5">
         <nav className="flex justify-between items-center py-4">
 

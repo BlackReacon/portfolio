@@ -15,7 +15,7 @@ export default function SkillsPage() {
               {/* skills - title */}
                 <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter inline-block relative group">
-                  <span className="cursor-default bg-gradient-to-r from-red-300 via-red-400 to-purple-600 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-red-300 via-red-400 to-purple-600 bg-clip-text text-transparent">
                    Skills
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-px overflow-hidden">

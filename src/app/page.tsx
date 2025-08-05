@@ -3,10 +3,12 @@ import Hero from "@/components/sections/hero/page";
 import SkillsPage from "@/components/sections/skills/page";
 import ProjectsPage from "@/components/sections/projects/page";
 import ContactPage from "@/components/sections/contact/page";
+import ScrollProgressBar from "@/components/decorations/scrollProgress/page";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      <ScrollProgressBar />
       <main>
         <Hero />
         <About />

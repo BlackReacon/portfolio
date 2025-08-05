@@ -14,7 +14,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="relative bg-gray-800/50 border border-purple-400/20 rounded-lg overflow-hidden group hover:border-purple-400/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10">
+    <div className="card relative bg-gray-800/50 border border-purple-400/20 rounded-lg overflow-hidden group hover:border-purple-400/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/50">
       {/* Placeholder for screenshots  */}
       <div className="h-64 bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
         <div className="text-4xl text-gray-500">Coming Soon</div>

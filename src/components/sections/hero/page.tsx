@@ -7,12 +7,12 @@ export default function HeroPage() {
       className="pt-40 pb-32 text-center bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 border-b border-b-purple-400/30"
     >
       <div className="container mx-auto px-5">
-        <p className="cursor-default text-xl md:text-2xl text-gray-300 font-light tracking-wider mb-2">
+        <p className="text-xl md:text-2xl text-gray-300 font-light tracking-wider mb-2">
           Hallo, ich bin
         </p>
      
         <div className="inline-block mb-4">
-          <h2 className="cursor-default text-6xl md:text-8xl font-extrabold tracking-tighter uppercase bg-gradient-to-r from-red-300 via-red-400 to-purple-600 bg-clip-text text-transparent transition-all duration-300 group-hover:brightness-110">
+          <h2 className="text-6xl md:text-8xl font-extrabold tracking-tighter uppercase bg-gradient-to-r from-red-300 via-red-400 to-purple-600 bg-clip-text text-transparent transition-all duration-300 group-hover:brightness-110">
             Daria Schmidt
           </h2>
           <div className="bottom-0 left-0 w-full ">
@@ -20,7 +20,7 @@ export default function HeroPage() {
           </div>
         </div>
      
-        <p className="cursor-default text-xl md:text-2xl text-gray-300 mb-12 font-light tracking-wider">
+        <p className="text-xl md:text-2xl text-gray-300 mb-12 font-light tracking-wider">
           Staatlich geprüfte Technikerin Mechatronik
           <br />&<br />
           Fullstack-Webentwicklerin

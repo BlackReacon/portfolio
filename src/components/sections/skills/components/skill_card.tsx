@@ -10,7 +10,7 @@ interface SkillCardProps {
 
 export function SkillCard({ skill }: SkillCardProps) {
   return (
-    <div className="relative bg-gray-800/50 p-6 border border-purple-400/20 rounded-lg text-center group hover:border-purple-400/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10">
+    <div className="card relative bg-gray-800/50 p-6 border border-purple-400/20 rounded-lg text-center group hover:border-purple-400/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-red-500/50">
 
       <div className="absolute inset-0 bg-gradient-to-br from-red-900/10 via-purple-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-lg" />
 
