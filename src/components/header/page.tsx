@@ -1,11 +1,20 @@
 import Link from "next/link";
+import BurgerMenu from "./mobilemenu/page";
 
 export default function Header() {
+  const navLinks = [
+    { href: "/", text: "Home" },
+    { href: "/#about", text: "Über mich" },
+    { href: "/#skills", text: "Skills" },
+    { href: "/#projects", text: "Projekte" },
+    { href: "/#contact", text: "Kontakt" },
+  ];
+
   return (
     <header className="fixed w-full top-0 bg-gradient-to-l from-red-700/20 via-gray-900 to-gray-900 bg-gray-900 border-b border-b-purple-400/30 z-50">
       <div className="container mx-auto px-5">
         <nav className="flex justify-between items-center py-4">
-
+          {/* Logo Link */}
           <Link href="/" className="group relative inline-block">
             <h1 className="text-3xl font-extrabold uppercase tracking-tighter bg-gradient-to-r from-red-300 via-red-400 to-purple-600 bg-clip-text text-transparent transition-all duration-300 group-hover:brightness-110">
               Daria&apos;s Portfolio
@@ -17,71 +26,28 @@ export default function Header() {
             <div className="absolute inset-x-0 bottom-0 h-1 bg-purple-600/10 blur-md opacity-0 group-hover:opacity-100 group-hover:scale-x-105 transition-all duration-700" />
           </Link>
 
-          <div>
-          <ul className="hidden lg:flex gap-12">
-            <li>
-              <Link
-                href="/"
-                className="text-white font-semibold uppercase tracking-wider text-sm relative group px-2 py-1"
-              >
-                <span className="relative transition-colors duration-300 group-hover:text-purple-300">
-                  Home
-                </span>
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500 group-hover:w-full"></span>
-                <span className="absolute inset-0 rounded bg-purple-400/10 w-0 group-hover:w-full transition-all duration-300 ease-in-out"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#about"
-                className="text-white font-semibold uppercase tracking-wider text-sm relative group px-2 py-1"
-              >
-               <span className="relative transition-colors duration-300 group-hover:text-purple-300">
-                  Über mich
-                </span>
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500 group-hover:w-full"></span>
-                <span className="absolute inset-0 rounded bg-purple-400/10 w-0 group-hover:w-full transition-all duration-300 ease-in-out"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#skills"
-                className="text-white font-semibold uppercase tracking-wider text-sm relative group px-2 py-1"
-              >
-               <span className="relative transition-colors duration-300 group-hover:text-purple-300">
-                  Skills
-                </span>
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500 group-hover:w-full"></span>
-                <span className="absolute inset-0 rounded bg-purple-400/10 w-0 group-hover:w-full transition-all duration-300 ease-in-out"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#projects"
-                className="text-white font-semibold uppercase tracking-wider text-sm relative group px-2 py-1"
-              >
-                <span className="relative transition-colors duration-300 group-hover:text-purple-300">
-                  Projekte
-                </span>
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500 group-hover:w-full"></span>
-                <span className="absolute inset-0 rounded bg-purple-400/10 w-0 group-hover:w-full transition-all duration-300 ease-in-out"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#contact"
-                className="text-white font-semibold uppercase tracking-wider text-sm relative group px-2 py-1"
-              >
-               <span className="relative transition-colors duration-300 group-hover:text-purple-300">
-                  Kontakt
-                </span>
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500 group-hover:w-full"></span>
-                <span className="absolute inset-0 rounded bg-purple-400/10 w-0 group-hover:w-full transition-all duration-300 ease-in-out"></span>
-              </Link>
-            </li>
-          </ul>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:block">
+            <ul className="flex gap-12">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-white font-semibold uppercase tracking-wider text-sm relative group px-2 py-1"
+                  >
+                    <span className="relative transition-colors duration-300 group-hover:text-purple-300">
+                      {link.text}
+                    </span>
+                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500 group-hover:w-full"></span>
+                    <span className="absolute inset-0 rounded bg-purple-400/10 w-0 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          
+
+          {/* Mobile Navigation */}
+          <BurgerMenu links={navLinks} />
         </nav>
       </div>
     </header>
