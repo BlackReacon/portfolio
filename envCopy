@@ -1,0 +1,9 @@
+# MariaDB/MySQL
+MYSQL_ROOT_PASSWORD=your_root_password
+MYSQL_DATABASE=your_db
+MYSQL_USER=your_user
+MYSQL_PASSWORD=your_password
+
+# phpMyAdmin
+PMA_HOST=db_host
+PMA_PORT=db_port
