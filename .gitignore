@@ -39,3 +39,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Docker
+.dockerignore
+Dockerfile
+compose.yml
+db_data/
+
+# Datenbanken
+*.ibd
+*.frm
+*.MYD
+*.MYI
+*.log
+*.cnf
+*.opt
+
+# MariaDB / MySQL spezifisch
+tc.log
+undo*

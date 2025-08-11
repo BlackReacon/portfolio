@@ -2,14 +2,14 @@ services:
   db:
     image: mariadb:latest
     container_name: mariadb_portfolio
-    env_file: .env 
+    env_file: .env
     environment:
       MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MARIADB_DATABASE: ${MYSQL_DATABASE}
       MARIADB_USER: ${MYSQL_USER}
       MARIADB_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - ./db_data:/var/lib/mysql
+      - ./frontend/db_data:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -20,7 +20,7 @@ services:
     container_name: phpmyadmin
     depends_on:
       - db
-    env_file: .env 
+    env_file: .env
     environment:
       PMA_HOST: ${PMA_HOST}
       PMA_PORT: ${PMA_PORT}
@@ -30,7 +30,7 @@ services:
       - app-network
 
   web:
-    build: .
+    build: ./frontend
     container_name: nextjs-app
     ports:
       - "3000:3000"
@@ -40,6 +40,18 @@ services:
       - app-network
     restart: unless-stopped
 
+  php:
+    build: ./backend
+    container_name: php
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend:/var/www/html
+    links:
+      - db
+    networks:
+      - app-network  
+    
 networks:
   app-network:
     driver: bridge
