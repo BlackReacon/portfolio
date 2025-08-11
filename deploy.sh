@@ -22,27 +22,35 @@ echo 'MariaDB ist bereit. Erstelle Tabellen...'
 docker exec -i mariadb_portfolio mariadb -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" <<EOF
 CREATE TABLE IF NOT EXISTS skills (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+    icon VARCHAR(255),
+    title VARCHAR(100) NOT NULL,
+    description TEXT
 );
 
-CREATE TABLE IF NOT EXISTS technologien (
+CREATE TABLE IF NOT EXISTS technologies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS projekte (
+CREATE TABLE IF NOT EXISTS projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    titel VARCHAR(150) NOT NULL,
-    beschreibung TEXT
+    title VARCHAR(150) NOT NULL,
+    description TEXT
 );
 
-CREATE TABLE IF NOT EXISTS projekt_technologie (
-    projekt_id INT NOT NULL,
-    technologie_id INT NOT NULL,
-    PRIMARY KEY (projekt_id, technologie_id),
-    FOREIGN KEY (projekt_id) REFERENCES projekte(id) ON DELETE CASCADE,
-    FOREIGN KEY (technologie_id) REFERENCES technologien(id) ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS projects_technologies (
+    project_id INT NOT NULL,
+    technology_id INT NOT NULL,
+    PRIMARY KEY (project_id, technology_id),
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE
 );
+
+INSERT INTO skills (icon, title, description) VALUES
+('<FaHtml5 className="text-orange-500" size={24} />', 'HTML5', 'Semantisches Markup und progressive Web-Standards'),
+('<FaCss3Alt className="text-blue-500" size={24} />', 'CSS3', 'Advanced Styling, Animations und responsive Design'),
+('<FaJs className="text-yellow-400" size={24} />', 'JavaScript', 'ES6+, Performance-Optimierung und moderne Patterns');
+
 EOF
 
 echo 'Tabellen erfolgreich erstellt.'
