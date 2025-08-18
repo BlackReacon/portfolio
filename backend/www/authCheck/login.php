@@ -37,12 +37,12 @@ if (!empty($_SESSION['eingeloggt'])) {
     <link href="../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 
-<body class="bg-secondary">
+<body class="bg-secondary text-white">
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-dark text-white">
+                    <div class="card bg-dark text-white" >
                         <div class="card-body p-5 text-center">
 
                             <div class="mb-md-5 mt-md-4 pb-5">

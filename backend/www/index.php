@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'config.db.php';
 $isLoggedIn = isset($_SESSION['eingeloggt']);
 ?>
 
@@ -16,8 +17,39 @@ $isLoggedIn = isset($_SESSION['eingeloggt']);
 <body class="bg-secondary">
 
     <?php if ($isLoggedIn): ?>
-        <h1>Admin Dashboard</h1>
-        <a href="./authCheck/logout.php">Abmelden</a>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+                <div class="container-fluid d-flex justify-content-between align-items-center">
+                    <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
+                    <a href="./authCheck/logout.php" class="btn btn-outline-light">Abmelden</a>
+                </div>
+            </nav>
+        </header>
+        <main class="container mt-4">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <h2 class="text-white">Skills</h2>
+                        <a href="moduls/addSkill.php" class="btn btn-success">Skill hinzufügen</a>
+                    </div>
+                    <?php require 'moduls/showSkills.php'; ?>
+
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <h2 class="text-white">Projekte</h2>
+                        <a href="moduls/addProject.php" class="btn btn-success">Projekt hinzufügen</a>
+                    </div>
+                    <?php require 'moduls/showProjects.php'; ?>
+
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <h2 class="text-white">Technologien</h2>
+                        <a href="moduls/addTechnologie.php" class="btn btn-success">Technologie hinzufügen</a>
+                    </div>
+                    <?php require 'moduls/showTechnologies.php'; ?>
+
+                </div>
+            </div>
+        </main>
     <?php else: ?>
         <!-- Go to Login -->
         <div class="container">
