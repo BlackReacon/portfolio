@@ -11,7 +11,7 @@ $isLoggedIn = isset($_SESSION['eingeloggt']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-secondary">
@@ -33,19 +33,19 @@ $isLoggedIn = isset($_SESSION['eingeloggt']);
                         <h2 class="text-white">Skills</h2>
                         <a href="moduls/addSkill.php" class="btn btn-success">Skill hinzufügen</a>
                     </div>
-                    <?php require 'moduls/showSkills.php'; ?>
+                    <?php require './moduls/showSkills.php'; ?>
 
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <h2 class="text-white">Projekte</h2>
                         <a href="moduls/addProject.php" class="btn btn-success">Projekt hinzufügen</a>
                     </div>
-                    <?php require 'moduls/showProjects.php'; ?>
+                    <?php require './moduls/showProjects.php'; ?>
 
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <h2 class="text-white">Technologien</h2>
                         <a href="moduls/addTechnologie.php" class="btn btn-success">Technologie hinzufügen</a>
                     </div>
-                    <?php require 'moduls/showTechnologies.php'; ?>
+                    <?php require './moduls/showTechnologies.php'; ?>
 
                 </div>
             </div>

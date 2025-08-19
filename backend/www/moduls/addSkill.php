@@ -4,13 +4,12 @@ require_once(__DIR__ . '/../config.db.php');
 
 //Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {
-    header("Location: /www/authCheck/login.php");
+    header("Location: ../authCheck/login.php");
     exit;
 }
 
 global $mysqli;
 
-$success = false;
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("sss", $icon, $title, $description);
             $stmt->execute();
             $stmt->close();
-            $success = true;
             header("Location: ../index.php");
             exit;
         } else {
@@ -53,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <a href="../index.php" class="btn btn-outline-light">Zurück</a>
                 <span class="navbar-brand mb-0 h1">Neuen Skill hinzufügen</span>
-                <a href="/www/authCheck/logout.php" class="btn btn-outline-light">Abmelden</a>
+                <a href="../authCheck/logout.php" class="btn btn-outline-light">Abmelden</a>
             </div>
         </nav>
     </header>
