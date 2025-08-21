@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../config.db.php');
+require_once(__DIR__ . './../../config.db.php');
 
 //Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {

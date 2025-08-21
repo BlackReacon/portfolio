@@ -1,12 +1,12 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../config.db.php');
+require_once(__DIR__ . './../../config.db.php');
 
 // Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {
     header("Location: ../authCheck/login.php");
     exit;
-}
+} 
 
 global $mysqli;
 
@@ -28,7 +28,7 @@ if (
         $stmt->bind_param("sssi", $icon, $title, $description, $id);
         $stmt->execute();
         $stmt->close();
-        header("Location: ../index.php");
+        header("Location: ./../../index.php");
         exit;
     } else {
         echo '<div class="alert alert-danger">Datenbankfehler beim Vorbereiten der Abfrage</div>';

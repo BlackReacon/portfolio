@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../config.db.php');
+require_once(__DIR__ . './../../config.db.php');
 
 //Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {
@@ -9,12 +9,19 @@ if (!isset($_SESSION['eingeloggt'])) {
 
 global $mysqli;
 
-$sql = "SELECT * FROM skills ORDER BY title ASC";
+$sql = "SELECT * FROM skills ORDER BY id ASC";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $skills = $stmt->get_result();
 
-echo '<section class="skillsContainer">';
+echo '          
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <h2 class="text-white">Skills</h2>
+            <button class="btn btn-success" onclick="addSkill()">Skill hinzufügen</button>
+        </div>
+
+        <section class="skillsContainer">';
+
 while ($row = $skills->fetch_assoc()) {
     echo '
         <div class="skillCard bg-light text-dark border">
@@ -27,15 +34,15 @@ while ($row = $skills->fetch_assoc()) {
             
             <div class="text-end">
                 <button class="btn btn-primary editSkillBtn" onclick="toggleEditModal(' . htmlspecialchars($row['id']) . ')">Bearbeiten</button>
-                <button class="btn btn-danger deleteSkillBtn" onclick="confirmDelete('.htmlspecialchars($row['id']).')" ">Löschen</button>
+                <button class="btn btn-danger deleteSkillBtn" onclick="confirmDelete(' . htmlspecialchars($row['id']) . ')" ">Löschen</button>
             </div>
         </div>';
 
-echo '
+    echo '
         <div class="modal fade" id="editModal_' . htmlspecialchars($row['id']) . '" tabindex="-1" aria-labelledby="editModalLabel_' . htmlspecialchars($row['id']) . '" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
-              <form action="./moduls/editSkill.php" method="POST">
+              <form action="./moduls/skills/editSkill.php" method="POST">
                 <div class="modal-header">
                   <h5 class="modal-title" id="editModalLabel_' . htmlspecialchars($row['id']) . '">Skill bearbeiten</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
@@ -60,7 +67,7 @@ echo '
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary" name="edit_save_sbm">Speichern</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                  <button type="button" class="btn btn-secondary">Abbrechen</button>
                 </div>
               </form>
             </div>
@@ -71,11 +78,10 @@ echo '</section>';
 ?>
 
 <script>
-
     function confirmDelete(id) {
         let text = "Diesen Skill löschen?";
         if (confirm(text) === true) {
-            window.location.replace(`./moduls/deleteSkill.php?id=${id}`);
+            window.location.replace(`./moduls/skills/deleteSkill.php?id=${id}`);
         } else {
             return false;
         }
@@ -84,5 +90,9 @@ echo '</section>';
     function toggleEditModal(id) {
         const modal = new bootstrap.Modal(document.getElementById('editModal_' + id));
         modal.show();
+    }
+
+    function addSkill() {
+        window.location.href = './moduls/skills/frm_addSkill.php';
     }
 </script>
