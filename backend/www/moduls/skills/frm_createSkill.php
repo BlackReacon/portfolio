@@ -1,6 +1,6 @@
 <?php
 
-require_once './../../structur/head.php';
+require_once './../../structure/head.php';
 
 echo '
         <div class="container py-5">
@@ -13,7 +13,7 @@ echo '
                                 <div class="alert alert-danger"><?php echo htmlspecialchars($error) ?></div>
                             <?php endif; ?>
 
-                            <form method="post" action="./addSkill.php">
+                            <form method="post" action="./createSkill.php">
                                 <h2 class="fw-bold mb-2 text-uppercase">Neuer Skill</h2>
                                 <p class="text-white-50 mb-5">Bitte fühle alle Felder aus!</p>
 

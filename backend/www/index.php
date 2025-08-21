@@ -8,12 +8,12 @@ if (empty($_SESSION['eingeloggt'])) {
     header('Location: ./authCheck/frm_login.php');
     exit;
 } else {
-    require_once './structur/head.php';
+    require_once './structure/head.php';
 
-    require_once './structur/header.php';
+    require_once './structure/header.php';
 
-    require_once './structur/main.php';
+    require_once './structure/main.php';
     
-    require_once './structur/footer.php';
+    require_once './structure/footer.php';
 }
 

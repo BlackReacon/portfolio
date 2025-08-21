@@ -17,7 +17,7 @@ $skills = $stmt->get_result();
 echo '          
         <div class="d-flex justify-content-between align-items-center mt-4">
             <h2 class="text-white">Skills</h2>
-            <button class="btn btn-success" onclick="addSkill()">Skill hinzufügen</button>
+            <button class="btn btn-success" onclick="createSkill()">Skill hinzufügen</button>
         </div>
 
         <section class="skillsContainer">';
@@ -92,7 +92,7 @@ echo '</section>';
         modal.show();
     }
 
-    function addSkill() {
-        window.location.href = './moduls/skills/frm_addSkill.php';
+    function createSkill() {
+        window.location.href = './moduls/skills/frm_createSkill.php';
     }
 </script>

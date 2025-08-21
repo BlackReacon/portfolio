@@ -1,6 +1,6 @@
 <?php
 
-require_once './../structur/head.php'; 
+require_once './../structure/head.php'; 
 
     echo '
         <div class="container">
@@ -46,4 +46,4 @@ require_once './../structur/head.php';
         </div>
 ';
 
-require_once './../structur/footer.php'; 
+require_once './../structure/footer.php'; 
