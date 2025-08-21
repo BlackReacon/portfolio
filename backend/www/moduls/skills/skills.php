@@ -33,13 +33,13 @@ while ($row = $skills->fetch_assoc()) {
             </div> 
             
             <div class="text-end">
-                <button class="btn btn-primary editSkillBtn" onclick="toggleEditModal(' . htmlspecialchars($row['id']) . ')">Bearbeiten</button>
-                <button class="btn btn-danger deleteSkillBtn" onclick="confirmDelete(' . htmlspecialchars($row['id']) . ')" ">Löschen</button>
+                <button class="btn btn-primary editSkillBtn" onclick="toggleEditSkillModal(' . htmlspecialchars($row['id']) . ')">Bearbeiten</button>
+                <button class="btn btn-danger deleteSkillBtn" onclick="confirmSkillDelete(' . htmlspecialchars($row['id']) . ')" ">Löschen</button>
             </div>
         </div>';
 
     echo '
-        <div class="modal fade" id="editModal_' . htmlspecialchars($row['id']) . '" tabindex="-1" aria-labelledby="editModalLabel_' . htmlspecialchars($row['id']) . '" aria-hidden="true">
+        <div class="modal fade" id="editSkillModal_' . htmlspecialchars($row['id']) . '" tabindex="-1" aria-labelledby="editSkillModalLabel_' . htmlspecialchars($row['id']) . '" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <form action="./moduls/skills/editSkill.php" method="POST">
@@ -67,7 +67,7 @@ while ($row = $skills->fetch_assoc()) {
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary" name="edit_save_sbm">Speichern</button>
-                  <button type="button" class="btn btn-secondary">Abbrechen</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
                 </div>
               </form>
             </div>
@@ -78,7 +78,7 @@ echo '</section>';
 ?>
 
 <script>
-    function confirmDelete(id) {
+    function confirmSkillDelete(id) {
         let text = "Diesen Skill löschen?";
         if (confirm(text) === true) {
             window.location.replace(`./moduls/skills/deleteSkill.php?id=${id}`);
@@ -87,8 +87,8 @@ echo '</section>';
         }
     }
 
-    function toggleEditModal(id) {
-        const modal = new bootstrap.Modal(document.getElementById('editModal_' + id));
+    function toggleEditSkillModal(id) {
+        const modal = new bootstrap.Modal(document.getElementById('editSkillModal_' + id));
         modal.show();
     }
 
