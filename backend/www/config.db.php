@@ -1,11 +1,4 @@
 <?php
-
-//Check logged in status
-if (!isset($_SESSION['eingeloggt'])) {
-    header("Location: ../authCheck/login.php");
-    exit;
-}
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');

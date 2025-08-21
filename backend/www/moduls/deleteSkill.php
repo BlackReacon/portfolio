@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../config.db.php');
 
 //Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {
-    header("Location: /www/authCheck/login.php");
+    header("Location: ../authCheck/login.php");
     exit;
 }
 

@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../config.db.php');
 
 // Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {
-    header("Location: /www/authCheck/login.php");
+    header("Location: ../authCheck/login.php");
     exit;
 }
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projekt hinzufügen</title>
-    <link href="../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../../assets/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body class="bg-secondary text-white">
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <a href="../index.php" class="btn btn-outline-light">Zurück</a>
                 <span class="navbar-brand mb-0 h1">Neues Projekt hinzufügen</span>
-                <a href="/www/authCheck/logout.php" class="btn btn-outline-light">Abmelden</a>
+                <a href="../authCheck/logout.php" class="btn btn-outline-light">Abmelden</a>
             </div>
         </nav>
     </header>
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </main>
 
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../../assets/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </body>
 
 </html>
