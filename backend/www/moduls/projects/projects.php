@@ -87,6 +87,6 @@ echo '</section>';
     }
 
     function addProject() {
-        window.location.href = './moduls/project/frm_addProject.php';
+        window.location.href = './moduls/projects/frm_createProject.php';
     }
 </script>

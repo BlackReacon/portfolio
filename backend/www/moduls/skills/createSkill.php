@@ -32,9 +32,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Bitte alle Felder ausfüllen.";
     }
 }
-?>
-
-
-
-
-
