@@ -35,9 +35,8 @@ while ($row = $projects->fetch_assoc()) {
                 <button class="btn btn-primary editSkillBtn" onclick="toggleEditProjectModal(' . htmlspecialchars($row['id']) . ')">Bearbeiten</button>
                 <button class="btn btn-danger deleteSkillBtn" onclick="confirmProjectDelete(' . htmlspecialchars($row['id']) . ')" ">Löschen</button>
             </div>
-        </div>';
+        </div>
 
-    echo '
         <div class="modal fade" id="editProjectModal_' . htmlspecialchars($row['id']) . '" tabindex="-1" aria-labelledby="editProjectModalLabel_' . htmlspecialchars($row['id']) . '" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
