@@ -1,4 +1,12 @@
 <?php
+session_start();  
+require_once(__DIR__ . './../../config.db.php');
+
+//Check logged in status
+if (!isset($_SESSION['eingeloggt'])) {
+    header("Location: ./../../authCheck/frm_login.php");
+    exit;
+}
 
 require_once './../../structure/head.php';
 
