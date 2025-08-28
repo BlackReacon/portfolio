@@ -14,10 +14,15 @@ $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $skills = $stmt->get_result();
 
+$iconPath = './moduls/img/icons/';
+
 echo '          
         <div class="d-flex justify-content-between align-items-center mt-4">
             <h2 class="text-white">Skills</h2>
-            <button class="btn btn-success" onclick="createSkill()">Skill hinzufügen</button>
+            <div class="text-end">
+                <button class="btn btn-primary" onclick="toggleUploadIcon()">Icon hochladen</button>
+                <button class="btn btn-success" onclick="createSkill()">Skill hinzufügen</button>
+            </div>
         </div>
 
         <section class="skillsContainer">';
@@ -26,10 +31,10 @@ while ($row = $skills->fetch_assoc()) {
     echo '
         <div class="skillCard bg-light text-dark border">
             <div class="text-start">
-                <p class="m-0 skillId">' . htmlspecialchars($row['id']) . '</p>
-                <p class="m-0 skillIcon">' . htmlspecialchars($row['icon']) . '</p>
-                <p class="m-0 skillTitle">' . htmlspecialchars($row['title']) . '</p>
-                <p class="m-0 skillDescription">' . htmlspecialchars($row['description']) . '</p>
+              <p class="m-0 skillId">' . htmlspecialchars($row['id']) . '</p>
+              <img src="' . htmlspecialchars($iconPath . $row['icon']) . '" alt="' . htmlspecialchars($row['title']) . ' Icon" class="skillIcon img-thumbnail" style="width:48px">
+              <p class="m-0 skillTitle">' . htmlspecialchars($row['title']) . '</p>
+              <p class="m-0 skillDescription">' . htmlspecialchars($row['description']) . '</p>
             </div> 
             
             <div class="text-end">
@@ -53,6 +58,7 @@ while ($row = $skills->fetch_assoc()) {
                     <div class="mb-3">
                         <label for="edit_icon_' . $row['id'] . '" class="form-label">Icon</label>
                         <input type="text" class="form-control" name="edit_icon" id="edit_icon_' . $row['id'] . '" value="' . htmlspecialchars($row['icon']) . '" required>
+
                     </div>
 
                     <div class="mb-3">
@@ -74,6 +80,38 @@ while ($row = $skills->fetch_assoc()) {
           </div>
         </div>';
 }
+
+echo '
+<div class="modal fade" id="uploadIconModal" tabindex="-1" aria-labelledby="uploadIconModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="./moduls/skills/uploadIcon.php" method="POST" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadIconModalLabel">Icon hochladen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="mb-3">
+                <label for="icon_name" class="form-label">Icon Name (Dropdown-Name)</label>
+                <input type="text" class="form-control" name="icon_name" id="icon_name" required placeholder="z.B. html5, css3, javascript">
+            </div>
+
+            <div class="mb-3">
+                <label for="icon_file" class="form-label">Icon Datei (SVG)</label>
+                <input type="file" class="form-control" name="icon_file" id="icon_file" accept=".svg" required>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" name="upload_icon">Hochladen</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>';
+
 echo '</section>';
 ?>
 
@@ -90,6 +128,11 @@ echo '</section>';
     function toggleEditSkillModal(id) {
         const modal = new bootstrap.Modal(document.getElementById('editSkillModal_' + id));
         modal.show();
+    }
+
+    function toggleUploadIcon() {
+        const modal = new bootstrap.Modal(document.getElementById('uploadIconModal'));
+        modal.show();  
     }
 
     function createSkill() {

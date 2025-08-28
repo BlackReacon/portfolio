@@ -20,22 +20,36 @@ done
 echo 'MariaDB ist bereit. Erstelle Tabellen...'
 
 docker exec -i mariadb_portfolio mariadb -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" <<EOF
+CREATE TABLE IF NOT EXISTS icons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    file_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS skills (
     id INT AUTO_INCREMENT PRIMARY KEY,
     icon VARCHAR(255),
     title VARCHAR(100) NOT NULL,
-    description TEXT
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS technologies (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(100) NOT NULL
+    title VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
-    description TEXT
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS projects_technologies (
@@ -43,7 +57,9 @@ CREATE TABLE IF NOT EXISTS projects_technologies (
     technology_id INT NOT NULL,
     PRIMARY KEY (project_id, technology_id),
     FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
-    FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE
+    FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO skills (icon, title, description) VALUES
