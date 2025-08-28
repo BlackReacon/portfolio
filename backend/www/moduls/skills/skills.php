@@ -3,8 +3,8 @@ require_once(__DIR__ . './../../config.db.php');
 
 //Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {
-    header("Location: ../authCheck/login.php");
-    exit;
+  header("Location: ../authCheck/login.php");
+  exit;
 }
 
 global $mysqli;
@@ -14,7 +14,15 @@ $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $skills = $stmt->get_result();
 
-$iconPath = './moduls/img/icons/';
+$iconPathSkills = './moduls/img/icons/';
+
+$icons = [];
+$iconQuery = $mysqli->query("SELECT * FROM icons ORDER BY name ASC");
+if ($iconQuery) {
+  while ($row = $iconQuery->fetch_assoc()) {
+    $icons[] = $row;
+  }
+}
 
 echo '          
         <div class="d-flex justify-content-between align-items-center mt-4">
@@ -28,11 +36,11 @@ echo '
         <section class="skillsContainer">';
 
 while ($row = $skills->fetch_assoc()) {
-    echo '
+  echo '
         <div class="skillCard bg-light text-dark border">
             <div class="text-start">
               <p class="m-0 skillId">' . htmlspecialchars($row['id']) . '</p>
-              <img src="' . htmlspecialchars($iconPath . $row['icon']) . '" alt="' . htmlspecialchars($row['title']) . ' Icon" class="skillIcon img-thumbnail" style="width:48px">
+              <img src="' . htmlspecialchars($iconPathSkills . $row['icon']) . '" alt="' . htmlspecialchars($row['title']) . ' Icon" class="skillIcon img-thumbnail" style="width:48px">
               <p class="m-0 skillTitle">' . htmlspecialchars($row['title']) . '</p>
               <p class="m-0 skillDescription">' . htmlspecialchars($row['description']) . '</p>
             </div> 
@@ -43,7 +51,7 @@ while ($row = $skills->fetch_assoc()) {
             </div>
         </div>';
 
-    echo '
+  echo '
         <div class="modal fade" id="editSkillModal_' . htmlspecialchars($row['id']) . '" tabindex="-1" aria-labelledby="editSkillModalLabel_' . htmlspecialchars($row['id']) . '" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -57,9 +65,13 @@ while ($row = $skills->fetch_assoc()) {
 
                     <div class="mb-3">
                         <label for="edit_icon_' . $row['id'] . '" class="form-label">Icon</label>
-                        <input type="text" class="form-control" name="edit_icon" id="edit_icon_' . $row['id'] . '" value="' . htmlspecialchars($row['icon']) . '" required>
-
-                    </div>
+                        <select class="frm-control" name="edit_icon" id="edit_icon_' . $row['id'] . '" value="' . htmlspecialchars($row['icon']) . '" required>';
+  foreach ($icons as $icon) {
+    $iconPath = './modules/img/icons/' . htmlspecialchars($icon['file_name']);
+    echo '<option value="' . htmlspecialchars($icon['file_name']) . '">' .
+      htmlspecialchars($icon['name']) . '</option>';
+  }
+  echo '              </div>
 
                     <div class="mb-3">
                         <label for="edit_title_' . $row['id'] . '" class="form-label">Titel</label>
@@ -116,26 +128,26 @@ echo '</section>';
 ?>
 
 <script>
-    function confirmSkillDelete(id) {
-        let text = "Diesen Skill löschen?";
-        if (confirm(text) === true) {
-            window.location.replace(`./moduls/skills/deleteSkill.php?id=${id}`);
-        } else {
-            return false;
-        }
+  function confirmSkillDelete(id) {
+    let text = "Diesen Skill löschen?";
+    if (confirm(text) === true) {
+      window.location.replace(`./moduls/skills/deleteSkill.php?id=${id}`);
+    } else {
+      return false;
     }
+  }
 
-    function toggleEditSkillModal(id) {
-        const modal = new bootstrap.Modal(document.getElementById('editSkillModal_' + id));
-        modal.show();
-    }
+  function toggleEditSkillModal(id) {
+    const modal = new bootstrap.Modal(document.getElementById('editSkillModal_' + id));
+    modal.show();
+  }
 
-    function toggleUploadIcon() {
-        const modal = new bootstrap.Modal(document.getElementById('uploadIconModal'));
-        modal.show();  
-    }
+  function toggleUploadIcon() {
+    const modal = new bootstrap.Modal(document.getElementById('uploadIconModal'));
+    modal.show();
+  }
 
-    function createSkill() {
-        window.location.href = './moduls/skills/frm_createSkill.php';
-    }
+  function createSkill() {
+    window.location.href = './moduls/skills/frm_createSkill.php';
+  }
 </script>
