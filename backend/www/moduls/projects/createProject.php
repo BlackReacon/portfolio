@@ -15,11 +15,12 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['frm_title']);
     $description = trim($_POST['frm_description']);
+    $image = trim($_POST['frm_projectImg']);
 
     if (!empty($title) && !empty($description)) {
-        $stmt = $mysqli->prepare("INSERT INTO projects (title, description) VALUES (?, ?)");
+        $stmt = $mysqli->prepare("INSERT INTO projects (title, description, image) VALUES (?, ?, ?)");
         if ($stmt) {
-            $stmt->bind_param("ss", $title, $description);
+            $stmt->bind_param("sss", $title, $description, $image);
             $stmt->execute();
             $stmt->close();
             $success = true;

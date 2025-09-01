@@ -8,6 +8,15 @@ if (!isset($_SESSION['eingeloggt'])) {
     exit;
 }
 
+global $mysqli;
+$projectImages = [];
+$projectImgQuery = $mysqli->query("SELECT * FROM projectImages ORDER BY name ASC");
+if ($projectImgQuery) {
+    while ($row = $projectImgQuery->fetch_assoc()) {
+        $projectImages [] = $row;
+    }
+}
+
 require_once './../../structure/head.php';
 
 echo '
@@ -24,6 +33,21 @@ echo '
                             <form method="post" action="./createProject.php">
                                 <h2 class="fw-bold mb-2 text-uppercase">Neues Projekt</h2>
                                 <p class="text-white-50 mb-5">Bitte fühle alle Felder aus!</p>
+
+                                <div data-mdb-input-init class="form-outline form-white mb-4">
+                                    <label for="projectImg" class="form-label">Projekt Bild</label>
+                                    <select name="frm_projectImg" id="projectImg" class="form-control form-control-lg">';
+
+                                    if(!empty($projectImages)) {
+                                        foreach ($projectImages as $proImg) {
+                                            $projectImgPath = './moduls/img/projects/' . htmlspecialchars($proImg['file_name']);
+                                            echo '<option value="' . htmlspecialchars($proImg['file_name']) .'">' . htmlspecialchars($proImg['name']) . ' (' . htmlspecialchars($proImg['file_name']) .')</option>';
+                                        }
+                                    } else {
+                                        echo '<option value="">Keine Projekt Bilder verfügbar</option>';
+                                    }
+                                echo ' </select>
+                                </div>
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
                                     <label for="title" class="form-label">Name</label>

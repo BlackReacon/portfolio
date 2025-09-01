@@ -14,16 +14,18 @@ if (
     isset($_POST['edit_save_sbm']) &&
     isset($_POST['project_id']) &&
     !empty($_POST['edit_title']) &&
-    !empty($_POST['edit_description'])
+    !empty($_POST['edit_description']) &&
+    !empty($_POST['edit_projectImg'])
 ) {
     $id = $_POST['project_id'];
     $title = trim($_POST['edit_title']);
     $description = trim($_POST['edit_description']);
+    $image = trim($_POST['edit_projectImg']);
 
-    $sql = "UPDATE projects SET title = ?, description = ? WHERE id = ?";
+    $sql = "UPDATE projects SET title = ?, description = ?, image = ? WHERE id = ?";
     $stmt = $mysqli->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param("ssi", $title, $description, $id);
+        $stmt->bind_param("sssi", $title, $description, $image, $id);
         $stmt->execute();
         $stmt->close();
         header("Location: ./../../index.php");

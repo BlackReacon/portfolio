@@ -31,7 +31,7 @@ echo '
                                 <p class="text-white-50 mb-5">Bitte fühle alle Felder aus!</p>
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
-                                    <label for="icon" class="form-label">Icon (HTML oder Text)</label>
+                                    <label for="icon" class="form-label">Icon</label>
                                     <select name="frm_icon" id="icon" class="form-control form-control-lg">';
 
 if (!empty($icons)) {

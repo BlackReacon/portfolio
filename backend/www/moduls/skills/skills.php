@@ -65,13 +65,17 @@ while ($row = $skills->fetch_assoc()) {
 
                     <div class="mb-3">
                         <label for="edit_icon_' . $row['id'] . '" class="form-label">Icon</label>
-                        <select class="frm-control" name="edit_icon" id="edit_icon_' . $row['id'] . '" value="' . htmlspecialchars($row['icon']) . '" required>';
+                        <select class="form-control" name="edit_icon" id="edit_icon_' . $row['id'] . '" value="' . htmlspecialchars($row['icon']) . '" required>';
   foreach ($icons as $icon) {
-    $iconPath = './modules/img/icons/' . htmlspecialchars($icon['file_name']);
-    echo '<option value="' . htmlspecialchars($icon['file_name']) . '">' .
+    $selected = '';
+    if ($row['icon'] === $icon['file_name']) {
+      $selected = 'selected';
+    }
+    echo '<option value="' . htmlspecialchars($icon['file_name']) . '" ' . $selected . '>' .
       htmlspecialchars($icon['name']) . '</option>';
   }
-  echo '              </div>
+  echo '            </select>  
+                    </div>
 
                     <div class="mb-3">
                         <label for="edit_title_' . $row['id'] . '" class="form-label">Titel</label>

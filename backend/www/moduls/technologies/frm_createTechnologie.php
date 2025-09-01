@@ -32,7 +32,7 @@ echo '
 
                                 <div class="d-flex justify-content-between">
                                     <button class="btn btn-secondary" onclick="cancel()">Abbrechen</button>
-                                    <button data-mdb-button-init data-mdb-ripple-init type="submit" class="btn btn-success">Projekt speichern</button>
+                                    <button data-mdb-button-init data-mdb-ripple-init type="submit" class="btn btn-success">Technologie speichern</button>
                                 </div>
                             </form>
 
