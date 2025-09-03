@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($_FILES['projectImg_file']) && $_FILES['projectImg_file']['error'] === UPLOAD_ERR_OK) {
         $file = $_FILES['projectImg_file'];
-        $maxsize = 200000;
+        $maxsize = 2000000;
         $allowedTypes = ['image/png'];
 
         if ($file['size'] > $maxsize) {
             header("Location: ./../../index.php");
-            exit;
-            /* echo 'Datei zu groß ' . $file['size']; */
+            exit; 
+           /* echo 'Datei zu groß ' . $file['size']; */
         }
 
         if (!in_array($file['type'], $allowedTypes)) {
@@ -50,9 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             } else {
                 $error = 'Fehler beim Speichern in der Datenbank';
+                /* echo 'Fehler beim Speichern in der DB'; */
             }
         }
     } else {
         $error = 'Fehler beim Hochladen';
+        /* echo 'Fehler beim Hochladen'; */
     }
 }

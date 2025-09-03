@@ -16,13 +16,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['frm_title']);
     $description = trim($_POST['frm_description']);
     $image = trim($_POST['frm_projectImg']);
+    $technologies = isset($_POST['technologies']) ? $_POST['technologies'] : [];
 
     if (!empty($title) && !empty($description)) {
         $stmt = $mysqli->prepare("INSERT INTO projects (title, description, image) VALUES (?, ?, ?)");
         if ($stmt) {
             $stmt->bind_param("sss", $title, $description, $image);
             $stmt->execute();
+            $projectId = $mysqli->insert_id;
             $stmt->close();
+
+            if (!empty($technologies)) {
+                $techStmt = $mysqli->prepare("INSERT INTO projects_technologies (project_id, technologie_id, technologie_title) VALUES (?, ?, ?)");
+            
+                foreach ($technologies as $techId) {
+                $titleQuery = $mysqli->prepare("SELECT title FROM technologies WHERE id = ?");
+                $titleQuery->bind_param("i", $techId);
+                $titleQuery->execute();
+                $result = $titleQuery->get_result();
+
+                if ($row = $result->fetch_assoc()) {
+                    $techTitle = $row['title'];
+                    $techStmt->bind_param("iis", $projectId, $techId, $techTitle);
+                    $techStmt->execute();
+                }
+
+                $titleQuery->close();
+            }
+
+            $techStmt->close();
+        }
+            
+
+
             $success = true;
             header("Location: ./../../index.php");
             exit;

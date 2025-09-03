@@ -17,6 +17,14 @@ if ($projectImgQuery) {
     }
 }
 
+$allTechnologies = [];
+$techQuery = $mysqli->query("SELECT * FROM technologies ORDER BY title ASC");
+if ($techQuery) {
+    while ($TechRow = $techQuery->fetch_assoc()) {
+        $allTechnologies[] = $TechRow;
+    }
+}
+
 require_once './../../structure/head.php';
 
 echo '
@@ -59,6 +67,24 @@ echo '
                                     <textarea class="form-control form-control-lg" id="description" name="frm_description" rows="3" required></textarea>
                                 </div>
 
+                                <div data-mbd-input-init class="form-outline form-white mb-4">
+                                    <label for="technologies" class="form-label">Technologien</label>
+                                    <div class="d-flex flex-wrap gap-2 justify-content-start">';
+foreach ($allTechnologies as $tech) {
+            echo '
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox"
+                           id="tech_' . htmlspecialchars($tech['id']) . '"
+                           name="technologies[]"
+                           value="' . htmlspecialchars($tech['id']) . '">
+                    <label class="form-check-label text-white" for="tech_' . htmlspecialchars($tech['id']) . '">'
+                        . htmlspecialchars($tech['title']) . '
+                    </label>
+                </div>';
+}
+
+                        echo '  </div>
+                                </div>
                                 <div class="d-flex justify-content-between">
                                     <button class="btn btn-secondary" onclick="cancel()">Abbrechen</button>
                                     <button data-mdb-button-init data-mdb-ripple-init type="submit" class="btn btn-success">Projekt speichern</button>

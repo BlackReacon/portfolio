@@ -24,6 +24,22 @@ if ($projectImgQuery) {
     }
 }
 
+$projectTechnologies = [];
+$projectTechQuery = $mysqli->query("SELECT * FROM projects_technologies ORDER BY id ASC");
+if ($projectTechQuery) {
+    while ($TechRow = $projectTechQuery->fetch_assoc()) {
+        $projectTechnologies[] = $TechRow;
+    }
+}
+
+$allTechnologies = [];
+$allTechQuery = $mysqli->query("SELECT * FROM technologies ORDER BY title ASC");
+if ($allTechQuery) {
+    while ($row = $allTechQuery->fetch_assoc()) {
+        $allTechnologies[] = $row;
+    }
+}
+
 echo '
         <div class="d-flex justify-content-between align-items-center mt-4">
             <h2 class="text-white">Projekte</h2>
@@ -37,13 +53,25 @@ echo '
 
 while ($row = $projects->fetch_assoc()) {
     echo '
-        <div class="projectsCard bg-light text-dark border">
+        <div class="projectsCard bg-light text-dark border d-flex justify-content-between">
             <div class="text-start">
                 <div class="projectId">' . htmlspecialchars($row['id']) . '</div>
                 <img src="' . htmlspecialchars($projectImgPath . $row['image']) . '" alt="' . htmlspecialchars($row['title']) . ' Icon" class="projectImg img-thumbnail" style="width:240px">
-                <div class="projectTitle">' . htmlspecialchars($row['title']) . '</div>
+                <div class="projectTitle"><strong>' . htmlspecialchars($row['title']) . '</strong></div>
                 <div class="projectDescription">' . htmlspecialchars($row['description']) . '</div>
             </div> 
+
+            <div class="text-center">
+                <div class="projectTechnologie">
+                 <strong>Technologien:</strong><br>';
+    foreach ($projectTechnologies as $proTech) {
+        if ($proTech['project_id'] == $row['id']) {
+            echo '<span>' . htmlspecialchars($proTech['technologie_title']) . '</span><br>';
+        }
+    }
+    echo ' </div>
+
+            </div>
             
             <div class="text-end">
                 <button class="btn btn-primary editSkillBtn" onclick="toggleEditProjectModal(' . htmlspecialchars($row['id']) . ')">Bearbeiten</button>
@@ -85,8 +113,31 @@ while ($row = $projects->fetch_assoc()) {
                     <div class="mb-3">
                         <label for="edit_description_' . $row['id'] . '" class="form-label">Beschreibung</label>
                         <textarea class="form-control" name="edit_description" id="edit_description_' . $row['id'] . '" required>' . htmlspecialchars($row['description']) . '</textarea>
-                    </div>
-                </div>
+                    </div>';
+
+    foreach ($allTechnologies as $tech) {
+        $checked = false;
+
+        foreach ($projectTechnologies as $proTech) {
+            if ($proTech['project_id'] == $row['id'] && $proTech['technologie_id'] == $tech['id']) {
+                $checked = true;
+                break;
+            }
+        }
+
+        echo '
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox"
+                   name="technologies[]" value="' . htmlspecialchars($tech['id']) . '" 
+                   id="tech_' . htmlspecialchars($tech['id']) . '" ' . ($checked ? 'checked' : '') . '>
+            <label class="form-check-label" for="tech_' . htmlspecialchars($tech['id']) . '">'
+            . htmlspecialchars($tech['title']) . '
+            </label>
+        </div>';
+    }
+
+
+    echo '     </div>
                 <div class="modal-footer"> 
                     <button type="submit" class="btn btn-primary" name="edit_save_sbm">Speichern</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button> 

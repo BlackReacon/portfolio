@@ -2,11 +2,10 @@
 session_start();
 require_once(__DIR__ . './../../config.db.php');
 
-// Check logged in status
 if (!isset($_SESSION['eingeloggt'])) {
     header("Location: ../authCheck/login.php");
     exit;
-} 
+}
 
 global $mysqli;
 
@@ -17,22 +16,50 @@ if (
     !empty($_POST['edit_description']) &&
     !empty($_POST['edit_projectImg'])
 ) {
-    $id = $_POST['project_id'];
+    $id = intval($_POST['project_id']);
     $title = trim($_POST['edit_title']);
     $description = trim($_POST['edit_description']);
     $image = trim($_POST['edit_projectImg']);
+    $technologies = isset($_POST['technologies']) ? $_POST['technologies'] : [];
 
-    $sql = "UPDATE projects SET title = ?, description = ?, image = ? WHERE id = ?";
-    $stmt = $mysqli->prepare($sql);
+    $stmt = $mysqli->prepare("UPDATE projects SET title = ?, description = ?, image = ? WHERE id = ?");
     if ($stmt) {
         $stmt->bind_param("sssi", $title, $description, $image, $id);
         $stmt->execute();
         $stmt->close();
-        header("Location: ./../../index.php");
-        exit;
     } else {
-        echo '<div class="alert alert-danger">Datenbankfehler beim Vorbereiten der Abfrage</div>';
+        echo '<div class="alert alert-danger">Datenbankfehler beim Vorbereiten der Projekt-Aktualisierung.</div>';
+        exit;
     }
+
+    $deleteStmt = $mysqli->prepare("DELETE FROM projects_technologies WHERE project_id = ?");
+    if ($deleteStmt) {
+        $deleteStmt->bind_param("i", $id);
+        $deleteStmt->execute();
+        $deleteStmt->close();
+    }
+
+    if (!empty($technologies)) {
+        $insertStmt = $mysqli->prepare("INSERT INTO projects_technologies (project_id, technologie_id, technologie_title) VALUES (?, ?, ?)");
+
+        foreach ($technologies as $techId) {
+
+            $techId = intval($techId);
+            $titleResult = $mysqli->query("SELECT title FROM technologies WHERE id = $techId");
+            $techTitle = $titleResult ? $titleResult->fetch_assoc()['title'] : '';
+
+            if ($insertStmt && $techTitle) {
+                $insertStmt->bind_param("iis", $id, $techId, $techTitle);
+                $insertStmt->execute();
+            }
+        }
+
+        if ($insertStmt) {
+            $insertStmt->close();
+        }
+    }
+    header("Location: ./../../index.php");
+    exit;
 } else {
     echo '<div class="alert alert-danger">Bitte füllen Sie alle Felder aus oder etwas ist schief gelaufen.</div>';
 }

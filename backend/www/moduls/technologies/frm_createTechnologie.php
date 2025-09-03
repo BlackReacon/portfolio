@@ -17,10 +17,6 @@ echo '
                     <div class="card bg-dark text-white">
                         <div class="card-body p-5 text-center">
 
-                            <?php if ($error): ?>
-                                <div class="alert alert-danger"><?php echo htmlspecialchars($error) ?></div>
-                            <?php endif; ?>
-
                             <form method="post" action="./createTechnologie.php">
                                 <h2 class="fw-bold mb-2 text-uppercase">Neue Technologie</h2>
                                 <p class="text-white-50 mb-5">Bitte fühle alle Felder aus!</p>
