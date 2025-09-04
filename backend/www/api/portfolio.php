@@ -23,24 +23,35 @@ try {
     $result = $mysqli->query("SELECT * FROM Projects ORDER BY id ASC");
     $data['projects'] = [];
     while ($row = $result->fetch_assoc()) {
+        $projectId = $row['id'];
+
+        // Technologies for this Project
+        $techStmt = $mysqli->prepare("
+            SELECT technologies.id, technologies.title 
+            FROM technologies
+            INNER JOIN projects_technologies ON projects_technologies.technologie_id = technologies.id
+            WHERE projects_technologies.project_id = ?
+            ORDER BY technologies.title ASC
+        ");
+        $techStmt->bind_param("i", $projectId);
+        $techStmt->execute();
+        $techResult = $techStmt->get_result();
+
+        $technologies = [];
+        while ($techRow = $techResult->fetch_assoc()) {
+            $technologies[] = $techRow;
+        }
+
+        $row['technologies'] = $technologies;
+
         $data['projects'][] = $row;
     }
 
-    // Technologies
-    $result = $mysqli->query("SELECT * FROM Technologies ORDER BY id ASC");
-    $data['technologies'] = [];
-    while ($row = $result->fetch_assoc()) {
-        $data['technologies'][] = $row;
-    }
-
     echo json_encode(['success' => true, 'data' => $data]);
-
-    if (mysqli_connect_errno()) {
-        throw new Exception("Keine verbindung zur Datenbank möglich");
-    }
-
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'error' => 'Datenbankfehler']);
-    return;
+    echo json_encode([
+        'success' => false,
+        'error' => 'Datenbankfehler: ' . $e->getMessage()
+    ]);
 }
