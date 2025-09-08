@@ -2,8 +2,6 @@
 session_start();
 require_once 'config.db.php';
 
-
-
 if (empty($_SESSION['eingeloggt'])) {
     header('Location: ./authCheck/frm_login.php');
     exit;
@@ -15,5 +13,4 @@ if (empty($_SESSION['eingeloggt'])) {
     require_once './structure/main.php';
     
     require_once './structure/footer.php';
-}
-
+} 

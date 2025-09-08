@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import Image from "next/image";
 
 interface SkillCardProps {
   skill: {
-    icon: ReactNode;
+    icon: string;
     title: string;
     description: string;
   };
@@ -11,7 +11,6 @@ interface SkillCardProps {
 export function SkillCard({ skill }: SkillCardProps) {
   return (
     <div className="card relative bg-gray-800/50 p-6 border border-purple-400/20 rounded-lg text-center group hover:border-purple-400/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-red-500/50">
-
       <div className="absolute inset-0 bg-gradient-to-br from-red-900/10 via-purple-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-lg" />
 
       <div className="relative w-16 h-16 mx-auto mb-6">
@@ -19,7 +18,13 @@ export function SkillCard({ skill }: SkillCardProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-red-400 via-purple-500 to-purple-600 rounded-full opacity-0 group-hover:opacity-30 blur-sm transition-all duration-700" />
         </div>
         <div className="grayscale group-hover:grayscale-0 relative w-full h-full bg-gray-900 rounded-full flex items-center justify-center text-2xl font-bold text-white border border-purple-400/20 group-hover:border-purple-400/40 transition-all duration-300">
-          {skill.icon}
+          <Image
+            src={skill.icon}
+            alt={`Screenshot des Projekts ${skill.title}`}
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            width={32}
+            height={32}
+          />
         </div>
       </div>
       <h3 className="text-xl font-bold uppercase tracking-wider mb-3 text-white group-hover:text-purple-300 transition-colors duration-300">

@@ -10,4 +10,3 @@ $mysqli = new mysqli($_ENV["hostname"], $_ENV["username"],$_ENV["password"], $_E
 if ($mysqli->connect_errno) {
     throw new RuntimeException('mysqli-Verbindungsfehler: '. $mysqli->connect_error);
 }
-

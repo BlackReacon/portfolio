@@ -2,60 +2,20 @@
 import { ProjectCard } from "@/components/sections/projects/components/project_card";
 import { useEffect, useRef, useState } from "react";
 
-const PROJECTS = [
-  {
-    title: "E-COMMERCE NEXUS",
-    description:
-      "Vollständige E-Commerce-Platform mit React, Node.js und MariaDB.",
-    tags: ["React", "Node.js", "MariaDB"],
-  },
-  {
-    title: "PRODUCTIVITY MATRIX",
-    description:
-      "High-Performance Task Management mit Real-time Collaboration.",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-  },
-  {
-    title: "DATA VISUALIZER",
-    description: "Datenvisualisierungstool mit D3.js und React.",
-    tags: ["D3.js", "React", "TypeScript"],
-  },
-  {
-    title: "AI CHATBOT",
-    description: "Konversations-KI mit Natural Language Processing.",
-    tags: ["Python", "TensorFlow", "NLTK"],
-  },
-  {
-    title: "E-COMMERCE NEXUS",
-    description:
-      "Vollständige E-Commerce-Platform mit React, Node.js und MariaDB.",
-    tags: ["React", "Node.js", "MariaDB"],
-  },
-  {
-    title: "PRODUCTIVITY MATRIX",
-    description:
-      "High-Performance Task Management mit Real-time Collaboration.",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-  },
-  {
-    title: "DATA VISUALIZER",
-    description: "Datenvisualisierungstool mit D3.js und React.",
-    tags: ["D3.js", "React", "TypeScript"],
-  },
-  {
-    title: "AI CHATBOT",
-    description: "Konversations-KI mit Natural Language Processing.",
-    tags: ["Python", "TensorFlow", "NLTK"],
-  },
-  /* With Image and URL
-  { 
-    title: 'E-COMMERCE NEXUS', 
-    description: 'Vollständige E-Commerce-Platform mit React, Node.js und MongoDB.',
-    tags: ['React', 'Node.js', 'MongoDB'],
-    imageUrl: '/images/projects/ecommerce.jpg', 
-    projectUrl: 'https://ecommerce-beispiel.de' 
-  }, */
-];
+interface Technology {
+  id: number;
+  title: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  technologies: Technology[];
+}
+
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_PROJECT_IMAGE_BASE_URL;
 
 /* interval in ms */
 const SLIDE_INTERVAL = 4000;
@@ -67,10 +27,50 @@ export function ProjectsGrid() {
   const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) {
+      console.error("API URL ist nicht definiert");
+      setError("API URL ist nicht definiert.");
+      return;
+    }
+
+    console.log("Fetching from:", apiUrl);
+
+    fetch(apiUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Received data:", data);
+        if (data.success && Array.isArray(data.data.projects)) {
+          setProjects(data.data.projects);
+        } else {
+          console.error("Projects data structure is invalid:", data);
+          setProjects([]);
+        }
+      })
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        setError("Projekte konnten nicht geladen werden.");
+      });
+  }, []);
+
   // groups of projects based on VISIBLE_PROJECTS
   const projectGroups = [];
-  for (let i = 0; i < PROJECTS.length; i += VISIBLE_PROJECTS) {
-    projectGroups.push(PROJECTS.slice(i, i + VISIBLE_PROJECTS));
+  for (let i = 0; i < projects.length; i += VISIBLE_PROJECTS) {
+    projectGroups.push(projects.slice(i, i + VISIBLE_PROJECTS));
   }
 
   useEffect(() => {
@@ -123,7 +123,12 @@ export function ProjectsGrid() {
               {group.map((project, projectIndex) => (
                 <ProjectCard
                   key={`${project.title}-${projectIndex}`}
-                  project={project}
+                  project={{
+                    title: project.title,
+                    description: project.description,
+                    image: `${IMAGE_BASE_URL}${project.image}`,
+                    technologies: project.technologies.map((tech) => tech.title),
+                  }}
                 />
               ))}
             </div>

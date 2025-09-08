@@ -2,7 +2,13 @@
 import { SkillCard } from "@/components/sections/skills/components/skill_card";
 import { motion, useAnimation, useInView, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { fetchSkills, Skill } from "@/lib/api/apiSkills";
+
+interface Skill {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+}
 
 const ICON_BASE_URL = process.env.NEXT_PUBLIC_ICON_BASE_URL;
 
@@ -55,10 +61,38 @@ export function SkillsGrid() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchSkills()
-      .then((data) => setSkills(data))
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) {
+      console.error("API URL ist nicht definiert");
+      setError("API URL ist nicht definiert.");
+      return;
+    }
+
+    console.log("Fetching from:", apiUrl);
+
+    fetch(apiUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((response) => {
+        console.log("Received data:", response);
+        if (response.success && Array.isArray(response.data.skills)) {
+          setSkills(response.data.skills);
+        } else {
+          console.error("Skills data is not an array:", response);
+          setSkills([]);
+        }
+      })
       .catch((err) => {
-        console.error(err);
+        console.error("Fetch error:", err);
         setError("Skills konnten nicht geladen werden.");
       });
   }, []);
@@ -85,13 +119,7 @@ export function SkillsGrid() {
             skill={{
               title: skill.title,
               description: skill.description,
-              icon: (
-                <img
-                  src={`${ICON_BASE_URL}${skill.icon}`}
-                  alt={skill.title}
-                  className="w-6 h-6"
-                />
-              ),
+              icon: `${ICON_BASE_URL}${skill.icon}`,
             }}
           />
         </motion.div>
