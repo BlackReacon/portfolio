@@ -53,10 +53,10 @@ export default function BurgerMenu({ links }: { links: { href: string; text: str
                       className="text-white text-2xl font-semibold uppercase tracking-wider relative group py-2 block"
                       onClick={closeMenu}
                     >
-                      <span className="relative transition-colors duration-300 group-hover:text-purple-300">
+                      <span className="relative transition-colors duration-300">
                         {link.text}
                       </span>
-                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500 group-hover:w-full"></span>
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-purple-400 transition-all duration-500"></span>
                     </Link>
                   </li>
                 ))}

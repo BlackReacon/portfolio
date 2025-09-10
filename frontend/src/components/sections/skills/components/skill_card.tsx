@@ -17,7 +17,7 @@ export function SkillCard({ skill }: SkillCardProps) {
         <div className="absolute inset-0 bg-gradient-to-r from-red-400 via-purple-500 to-purple-600 rounded-full p-0.5 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <div className="absolute inset-0 bg-gradient-to-r from-red-400 via-purple-500 to-purple-600 rounded-full opacity-0 group-hover:opacity-30 blur-sm transition-all duration-700" />
         </div>
-        <div className="grayscale group-hover:grayscale-0 relative w-full h-full bg-gray-900 rounded-full flex items-center justify-center text-2xl font-bold text-white border border-purple-400/20 group-hover:border-purple-400/40 transition-all duration-300">
+        <div className="md:grayscale group-hover:grayscale-0 relative w-full h-full bg-gray-900 rounded-full flex items-center justify-center text-2xl font-bold text-white border border-purple-400/20 group-hover:border-purple-400/40 transition-all duration-300">
           <Image
             src={skill.icon}
             alt={`Screenshot des Projekts ${skill.title}`}

@@ -13,17 +13,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="card relative bg-gray-800/50 border border-purple-400/20 rounded-lg overflow-hidden group hover:border-purple-400/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/50">
       <div className="h-64 bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
-        {/*         <Image
-          src={project.image}
-          alt={`Screenshot des Projekts ${project.title}`}
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          width={828}
-          height={512}
-        /> */}
         <img
           src={project.image}
           alt={`Screenshot des Projekts ${project.title}`}
-          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+          className="max-h-full max-w-full object-contain mx-auto"
         />
       </div>
 

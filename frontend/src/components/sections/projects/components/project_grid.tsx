@@ -25,10 +25,19 @@ const VISIBLE_PROJECTS = 2;
 export function ProjectsGrid() {
   const [activeGroupIndex, setActiveGroupIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const [projects, setProjects] = useState<Project[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // window width for responsive behavior
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize(); 
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -64,10 +73,17 @@ export function ProjectsGrid() {
       });
   }, []);
 
-  // groups of projects based on VISIBLE_PROJECTS
+  // dynamic visible projects based on screen size
+  const getVisibleProjectsCount = () => {
+    if (windowWidth < 768) return 1; 
+    return VISIBLE_PROJECTS; 
+  };
+
+  // group project depens on screen size
   const projectGroups = [];
-  for (let i = 0; i < projects.length; i += VISIBLE_PROJECTS) {
-    projectGroups.push(projects.slice(i, i + VISIBLE_PROJECTS));
+  const visibleProjects = getVisibleProjectsCount();
+  for (let i = 0; i < projects.length; i += visibleProjects) {
+    projectGroups.push(projects.slice(i, i + visibleProjects));
   }
 
   useEffect(() => {
@@ -79,7 +95,7 @@ export function ProjectsGrid() {
       }, SLIDE_INTERVAL);
     };
 
-    if (!isHovered) {
+    if (!isHovered && projectGroups.length > 1) {
       startSlideShow();
     } else if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -116,7 +132,7 @@ export function ProjectsGrid() {
       >
         {projectGroups.map((group, groupIndex) => (
           <div key={`group-${groupIndex}`} className="w-full flex-shrink-0">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className={`grid gap-8 ${visibleProjects === 1 ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-2'}`}>
               {group.map((project, projectIndex) => (
                 <ProjectCard
                   key={`${project.title}-${projectIndex}`}
@@ -133,8 +149,8 @@ export function ProjectsGrid() {
         ))}
       </div>
 
-      {/* navigation buttons */}
-      {isHovered && projectGroups.length > 1 && (
+      {/* navigation buttons - big screen */}
+      {isHovered && projectGroups.length > 1 && windowWidth >= 768 && (
         <>
           <button
             onClick={goToPrev}
@@ -151,6 +167,26 @@ export function ProjectsGrid() {
             &gt;
           </button>
         </>
+      )}
+
+      {/* navigation buttons - small screen */}
+      {isHovered && projectGroups.length > 1 && windowWidth < 768 && (
+        <div className="flex justify-center mt-6 space-x-4">
+          <button
+            onClick={goToPrev}
+            className="bg-black/50 text-white p-3 rounded-full z-10 hover:bg-black/75 transition"
+            aria-label="Zu den vorherigen Projekten zurückgehen"
+          >
+            &lt;
+          </button>
+          <button
+            onClick={goToNext}
+            className="bg-black/50 text-white p-3 rounded-full z-10 hover:bg-black/75 transition"
+            aria-label="Zu den nächste Projekten gehen"
+          >
+            &gt;
+          </button>
+        </div>
       )}
 
       {/* indicators */}

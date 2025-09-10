@@ -28,14 +28,14 @@ export default function AboutPage() {
                 <div className="relative mx-auto">
                   <div className="w-48 h-48 lg:w-72 lg:h-72 relative group">
                     <div className="absolute inset-0 bg-gradient-to-r from-red-400 via-purple-500 to-purple-600 rounded-full p-1 animate-[spin_4s_linear_infinite]">
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-400 via-purple-500 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 blur-md transition-all duration-700"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-red-400 via-purple-500 to-purple-600 rounded-full opacity-0 md:group-hover:opacity-100 blur-md transition-all duration-700"></div>
                     </div>
-                    <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-gray-800 group-hover:border-purple-500/30 transition-all duration-500">
+                    <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-gray-800 md:group-hover:border-purple-500/30 transition-all duration-500">
                       <Image
                         src="/profilpicture.png"
                         alt="Profil Bild von Daria"
                         fill
-                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        className="object-cover md:grayscale md:group-hover:grayscale-0 transition-all duration-700"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         priority
                       />
