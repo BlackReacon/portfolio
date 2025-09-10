@@ -61,7 +61,4 @@ undo*
 
 # php
 /backend/vendor/
-/backend/moduls/img
-backend/www/moduls/img/icons/
-
-*.png
+/backend/www/moduls/img
