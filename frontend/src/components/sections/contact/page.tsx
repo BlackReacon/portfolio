@@ -7,6 +7,11 @@ export default function ContactPage() {
       const name = formData.get("name")?.toString() || "";
       const email = formData.get("email")?.toString() || "";
       const message = formData.get("message")?.toString() || "";
+      const privacyAccepted = formData.get("privacy") === "on";
+
+      if (!privacyAccepted) {
+        throw new Error("Datenschutzerklärung muss akzeptiert werden");
+      }
 
       const mailText = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
@@ -83,6 +88,27 @@ export default function ContactPage() {
               placeholder="Nachricht eingeben"
               rows={5}
             />
+          </div>
+
+          <div className="flex items-start">
+            <div className="flex items-center h-5">
+              <input
+                id="privacy"
+                name="privacy"
+                type="checkbox"
+                required
+                className="w-4 h-4 bg-gray-700 border-gray-600 rounded focus:ring-blue-500"
+              />
+            </div>
+            <div className="ml-3 text-sm">
+              <label htmlFor="privacy" className="text-gray-300">
+                Ich habe die{" "}
+                <a href="/privatpolicy" className="text-blue-400 hover:text-blue-300 underline">
+                  Datenschutzerklärung
+                </a>{" "}
+                gelesen und stimme der Verarbeitung meiner Daten wie dort beschrieben zu.
+              </label>
+            </div>
           </div>
 
           <button
