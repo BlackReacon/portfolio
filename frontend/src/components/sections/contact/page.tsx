@@ -3,27 +3,21 @@ import { sendMail } from "@/lib/send-mail";
 export default function ContactPage() {
   async function handleFormSubmit(formData: FormData) {
     "use server";
-  try {
-    const name = formData.get("name")?.toString() || "";
-    const email = formData.get("email")?.toString() || "";
-    const message = formData.get("message")?.toString() || "";
+    try {
+      const name = formData.get("name")?.toString() || "";
+      const email = formData.get("email")?.toString() || "";
+      const message = formData.get("message")?.toString() || "";
 
-    console.log("Empfangene Daten:", { name, email, message });
+      const mailText = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
-    const mailText = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
-
-    await sendMail({
-      email,
-      subject: "Neue Kontaktanfrage",
-      text: mailText,
-    });
-        console.log("E-Mail erfolgreich gesendet");
-
-  } catch (error) {
-    console.error("Fehler beim Absenden des Formulars:", error);
+      await sendMail({
+        email,
+        subject: "Neue Kontaktanfrage",
+        text: mailText,
+      });
+    } catch (error) {
       throw new Error(`SMTP-Fehler: ${error}`);
-
-  }
+    }
   }
 
   return (
@@ -35,12 +29,16 @@ export default function ContactPage() {
           <br />
           Egal ob Projektanfragen, fachlicher Austausch oder Feedback.
           <br />
-          Nutze gerne das Kontaktformular oder schreibe mir direkt eine E-Mail an: kontakt@dariaschmidt.de
+          Nutze gerne das Kontaktformular oder schreibe mir direkt eine E-Mail
+          an: kontakt@dariaschmidt.de
         </p>
 
         <form action={handleFormSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-300 mb-1"
+            >
               Dein Name
             </label>
             <input
@@ -54,7 +52,10 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300 mb-1"
+            >
               Deine Email-Adresse
             </label>
             <input
@@ -68,7 +69,10 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-300 mb-1"
+            >
               Deine Nachricht
             </label>
             <textarea

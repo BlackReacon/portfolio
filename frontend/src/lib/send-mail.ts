@@ -22,7 +22,6 @@ export async function sendMail({ email, subject, text }: {
 
   try {
     await transporter.verify();
-    console.log("SMTP-Verbindung erfolgreich");
 
     const info = await transporter.sendMail({
       from: `"Kontaktformular" <${SMTP_SERVER_USERNAME}>`,
@@ -32,9 +31,7 @@ export async function sendMail({ email, subject, text }: {
       replyTo: email,
     });
 
-    console.log("Nachricht gesendet:", info.messageId);
   } catch (error) {
-    console.error("Fehler beim SMTP-Versand:", error);
     throw error;
   }
 }

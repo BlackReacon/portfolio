@@ -6,12 +6,15 @@ export default function Footer() {
     { href: "/privatpolicy", text: "Datenschutzerklärung" },
   ];
 
+  const date = new Date();
+  const year = date.getFullYear();
+
   return (
     <footer className="w-full bg-gradient-to-l from-red-700/20 via-gray-900 to-gray-900 bg-gray-900 border-t border-t-purple-400/30 z-50">
       <div className="container mx-auto px-5">
         <div className="flex flex-col md:flex-row justify-between items-center py-6 md:py-4 px-4 md:px-10 gap-4 md:gap-0">
           <h2 className="text-lg md:text-1xl uppercase tracking-tighter text-center md:text-left">
-            © Daria Schmidt 2025
+            © Daria Schmidt {year}
           </h2>
           <ul className="flex flex-col md:flex-row gap-3 md:gap-4 items-center">
             {footerLinks.map((link) => (

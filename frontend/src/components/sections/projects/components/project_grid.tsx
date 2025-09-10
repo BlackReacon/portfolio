@@ -38,8 +38,6 @@ export function ProjectsGrid() {
       return;
     }
 
-    console.log("Fetching from:", apiUrl);
-
     fetch(apiUrl, {
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +51,6 @@ export function ProjectsGrid() {
         return response.json();
       })
       .then((data) => {
-        console.log("Received data:", data);
         if (data.success && Array.isArray(data.data.projects)) {
           setProjects(data.data.projects);
         } else {

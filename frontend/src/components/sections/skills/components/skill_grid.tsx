@@ -68,8 +68,6 @@ export function SkillsGrid() {
       return;
     }
 
-    console.log("Fetching from:", apiUrl);
-
     fetch(apiUrl, {
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +81,6 @@ export function SkillsGrid() {
         return response.json();
       })
       .then((response) => {
-        console.log("Received data:", response);
         if (response.success && Array.isArray(response.data.skills)) {
           setSkills(response.data.skills);
         } else {
