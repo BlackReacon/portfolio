@@ -34,6 +34,8 @@ export default function ContactPage() {
           Ich freue mich auf Deine Nachricht.
           <br />
           Egal ob Projektanfragen, fachlicher Austausch oder Feedback.
+          <br />
+          Nutze gerne das Kontaktformular oder schreibe mir direkt eine E-Mail an: kontakt@dariaschmidt.de
         </p>
 
         <form action={handleFormSubmit} className="space-y-6">
