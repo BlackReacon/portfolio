@@ -24,7 +24,7 @@ export const CustomCursor = () => {
   }, [mouseX, mouseY]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-100 hidden md:block">
+    <div className="fixed inset-0 pointer-events-none z-[1000]">
 
       <motion.div
         className="absolute bg-red-500 rounded-full"
