@@ -43,7 +43,6 @@
 
 # docker
 */.dockerignore
-*/Dockerfile
 */compose.yml
 */db_data/
 
@@ -62,3 +61,4 @@ undo*
 
 # php
 /backend/vendor/
+/backend/moduls/img/

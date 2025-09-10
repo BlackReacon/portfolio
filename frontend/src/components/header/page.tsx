@@ -3,7 +3,7 @@ import BurgerMenu from "./mobilemenu/page";
 
 export default function Header() {
   const navLinks = [
-    { href: "/", text: "Home" },
+    { href: "/#home", text: "Home" },
     { href: "/#about", text: "Über mich" },
     { href: "/#skills", text: "Skills" },
     { href: "/#projects", text: "Projekte" },
@@ -15,7 +15,7 @@ export default function Header() {
       <div className="container mx-auto px-5">
         <nav className="flex justify-between items-center py-4">
           {/* Logo Link */}
-          <Link href="/" className="group relative inline-block">
+          <Link href="/#home" className="group relative inline-block">
             <h1 className="text-3xl font-extrabold uppercase tracking-tighter bg-gradient-to-r from-red-300 via-red-400 to-purple-600 bg-clip-text text-transparent transition-all duration-300 group-hover:brightness-110">
               Daria&apos;s Portfolio
             </h1>
