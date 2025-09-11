@@ -34,10 +34,6 @@ echo '
                     <div class="card bg-dark text-white">
                         <div class="card-body p-5 text-center">
 
-                            <?php if ($error): ?>
-                                <div class="alert alert-danger"><?php echo htmlspecialchars($error) ?></div>
-                            <?php endif; ?>
-
                             <form method="post" action="./createProject.php">
                                 <h2 class="fw-bold mb-2 text-uppercase">Neues Projekt</h2>
                                 <p class="text-white-50 mb-5">Bitte fühle alle Felder aus!</p>
@@ -59,12 +55,12 @@ echo '
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
                                     <label for="title" class="form-label">Name</label>
-                                    <input type="text" class="form-control form-control-lg" id="title" name="frm_title" required>
+                                    <input type="text" class="form-control form-control-lg" id="title" name="frm_title" value="' . (isset($_POST['frm_title']) ? htmlspecialchars($_POST['frm_title']) : '') . '" required>
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
                                     <label for="description" class="form-label">Beschreibung</label>
-                                    <textarea class="form-control form-control-lg" id="description" name="frm_description" rows="3" required></textarea>
+                                    <textarea class="form-control form-control-lg" id="description" name="frm_description" rows="3" required>' . (isset($_POST['frm_description']) ? htmlspecialchars($_POST['frm_description']) : '') . '</textarea>
                                 </div>
 
                                 <div data-mbd-input-init class="form-outline form-white mb-4">
@@ -76,7 +72,8 @@ foreach ($allTechnologies as $tech) {
                     <input class="form-check-input" type="checkbox"
                            id="tech_' . htmlspecialchars($tech['id']) . '"
                            name="technologies[]"
-                           value="' . htmlspecialchars($tech['id']) . '">
+                           value="' . htmlspecialchars($tech['id']) . '"' .
+                           (isset($_POST['technologies']) && in_array($tech['id'], $_POST['technologies']) ? ' checked' : '') . '>
                     <label class="form-check-label text-white" for="tech_' . htmlspecialchars($tech['id']) . '">'
                         . htmlspecialchars($tech['title']) . '
                     </label>
