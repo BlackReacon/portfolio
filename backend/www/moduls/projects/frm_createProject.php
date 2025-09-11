@@ -63,6 +63,11 @@ echo '
                                     <textarea class="form-control form-control-lg" id="description" name="frm_description" rows="3" required>' . (isset($_POST['frm_description']) ? htmlspecialchars($_POST['frm_description']) : '') . '</textarea>
                                 </div>
 
+                                <div data-mdb-input-init class="form-outline form-white mb-4">
+                                    <label for="link" class="form-label">Link</label>
+                                    <input type="text" class="form-control form-control-lg" id="link" name="frm_link" value="' . (isset($_POST['frm_link']) ? htmlspecialchars($_POST['frm_link']) : '') . '" required>
+                                </div>
+
                                 <div data-mbd-input-init class="form-outline form-white mb-4">
                                     <label for="technologies" class="form-label">Technologien</label>
                                     <div class="d-flex flex-wrap gap-2 justify-content-start">';

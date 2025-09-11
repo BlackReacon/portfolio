@@ -14,17 +14,19 @@ if (
     isset($_POST['project_id']) &&
     !empty($_POST['edit_title']) &&
     !empty($_POST['edit_description']) &&
-    !empty($_POST['edit_projectImg'])
+    !empty($_POST['edit_projectImg']) &&
+    !empty($_POST['edit_link'])
 ) {
     $id = intval($_POST['project_id']);
     $title = trim($_POST['edit_title']);
     $description = trim($_POST['edit_description']);
     $image = trim($_POST['edit_projectImg']);
+    $link = trim($_POST['edit_link']);
     $technologies = isset($_POST['technologies']) ? $_POST['technologies'] : [];
 
-    $stmt = $mysqli->prepare("UPDATE projects SET title = ?, description = ?, image = ? WHERE id = ?");
+    $stmt = $mysqli->prepare("UPDATE projects SET title = ?, description = ?, image = ? link = ? WHERE id = ?");
     if ($stmt) {
-        $stmt->bind_param("sssi", $title, $description, $image, $id);
+        $stmt->bind_param("sssi", $title, $description, $image, $id, $link);
         $stmt->execute();
         $stmt->close();
     } else {

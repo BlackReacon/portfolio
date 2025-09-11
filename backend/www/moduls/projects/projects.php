@@ -59,6 +59,7 @@ while ($row = $projects->fetch_assoc()) {
                 <img src="' . htmlspecialchars($projectImgPath . $row['image']) . '" alt="' . htmlspecialchars($row['title']) . ' Icon" class="projectImg img-thumbnail" style="width:240px">
                 <div class="projectTitle"><strong>' . htmlspecialchars($row['title']) . '</strong></div>
                 <div class="projectDescription">' . htmlspecialchars($row['description']) . '</div>
+                <div class="projectLink"><strong>Link:</strong> <a href="' . htmlspecialchars($row['link']) . '" target="_blank" rel="noopener noreferrer">' . htmlspecialchars($row['link']) . '</a> </div>
             </div> 
 
             <div class="text-center">
@@ -113,6 +114,10 @@ while ($row = $projects->fetch_assoc()) {
                     <div class="mb-3">
                         <label for="edit_description_' . $row['id'] . '" class="form-label">Beschreibung</label>
                         <textarea class="form-control" name="edit_description" id="edit_description_' . $row['id'] . '" required>' . htmlspecialchars($row['description']) . '</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_link_' . $row['id'] . '" class="form-label">Link</label>
+                        <input type="text" class="form-control" name="edit_link" id="edit_link_' . $row['id'] . '" value="' . htmlspecialchars($row['link']) . '" required>
                     </div>';
 
     foreach ($allTechnologies as $tech) {

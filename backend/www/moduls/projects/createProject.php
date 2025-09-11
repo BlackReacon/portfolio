@@ -16,12 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['frm_title']);
     $description = trim($_POST['frm_description']);
     $image = trim($_POST['frm_projectImg']);
+    $link = trim($_POST['frm_link']);
     $technologies = isset($_POST['technologies']) ? $_POST['technologies'] : [];
 
-    if (!empty($title) && !empty($description)) {
-        $stmt = $mysqli->prepare("INSERT INTO projects (title, description, image) VALUES (?, ?, ?)");
+    if (!empty($title) && !empty($description) && !empty($link)) {
+        $stmt = $mysqli->prepare("INSERT INTO projects (title, description, image, link) VALUES (?, ?, ?, ?)");
         if ($stmt) {
-            $stmt->bind_param("sss", $title, $description, $image);
+            $stmt->bind_param("ssss", $title, $description, $image, $link);
             $stmt->execute();
             $projectId = $mysqli->insert_id;
             $stmt->close();

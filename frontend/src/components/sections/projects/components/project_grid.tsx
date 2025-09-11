@@ -13,6 +13,7 @@ interface Project {
   description: string;
   image: string;
   technologies: Technology[];
+  link: string;
 }
 
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_PROJECT_IMAGE_BASE_URL;
@@ -141,6 +142,7 @@ export function ProjectsGrid() {
                     description: project.description,
                     image: `${IMAGE_BASE_URL}${project.image}`,
                     technologies: project.technologies.map((tech) => tech.title),
+                    link: project.link,
                   }}
                 />
               ))}
