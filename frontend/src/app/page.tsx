@@ -4,7 +4,7 @@ import SkillsPage from "@/components/sections/skills/page";
 import ProjectsPage from "@/components/sections/projects/page";
 import ContactPage from "@/components/sections/contact/page";
 import ScrollProgressBar from "@/components/decorations/scrollProgress/page";
-import Footer from "@/components/footer/page";
+
 
 export default function Home() {
   return (
@@ -16,7 +16,6 @@ export default function Home() {
         <SkillsPage />
         <ProjectsPage />
         <ContactPage />
-        <Footer />
       </main>
     </div>
   );

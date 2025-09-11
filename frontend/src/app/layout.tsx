@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header/page";
 import BlurBubbles from "@/components/decorations/blur_bubbles/page";
 import { CustomCursor } from "@/components/decorations/cursor/page";
+import Footer from "@/components/footer/page";
 
 
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <BlurBubbles />
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
