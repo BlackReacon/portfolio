@@ -7,3 +7,9 @@ MYSQL_PASSWORD=your_password
 # phpMyAdmin
 PMA_HOST=db_host
 PMA_PORT=db_port
+
+# SMTP Email Server
+SMTP_SERVER_USERNAME=your_email
+SMTP_SERVER_PASSWORD=your_password
+SMTP_SERVER_HOST=your_email_host
+SITE_MAIL_RECIEVER=your_email

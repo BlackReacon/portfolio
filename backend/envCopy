@@ -1,0 +1,11 @@
+#Admin 
+ADMIN_USERNAME=
+ADMIN_PASSWORD=
+
+#Database
+hostname = 
+username = 
+password = 
+database = 
+
+#Denk dran username und pw. MANUELL in phpmyadmin erstellen!
