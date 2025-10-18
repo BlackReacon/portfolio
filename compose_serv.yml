@@ -1,0 +1,32 @@
+services:
+  web:
+    build: ./frontend
+    container_name: nextjs-app
+    ports:
+      - "3333:3000"
+    environment:
+      NODE_ENV: production
+      SMTP_SERVER_USERNAME: ${SMTP_SERVER_USERNAME}
+      SMTP_SERVER_PASSWORD: ${SMTP_SERVER_PASSWORD}
+      SMTP_SERVER_HOST: ${SMTP_SERVER_HOST}
+      SITE_MAIL_RECIEVER: ${SITE_MAIL_RECIEVER}
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  php:
+    build: ./backend
+    container_name: php
+    ports:
+      - "1122:80"
+    volumes:
+      - ./backend:/var/www/html
+      - ./phpApacheConfig:/etc/apache2/sites-available
+    links:
+      - db
+    networks:
+      - app-network  
+    
+networks:
+  app-network:
+    driver: bridge
