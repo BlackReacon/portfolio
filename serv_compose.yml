@@ -22,8 +22,6 @@ services:
     volumes:
       - ./backend:/var/www/html
       - ./phpApacheConfig:/etc/apache2/sites-available
-    links:
-      - db
     networks:
       - app-network  
     
