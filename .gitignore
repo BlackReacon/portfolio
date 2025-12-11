@@ -62,3 +62,5 @@ undo*
 # php
 /backend/vendor/
 /backend/www/moduls/img
+
+compose.yml
